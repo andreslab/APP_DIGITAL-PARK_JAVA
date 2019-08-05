@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,6 +21,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -91,6 +94,13 @@ public class CategoryActivity extends AppCompatActivity implements GoogleApiClie
 
     //---------------------------------
 
+    ArrayList<String> arrayName = new ArrayList<String>();
+    ArrayList<String> arrayLatitude = new ArrayList<String>();
+    ArrayList<String> arrayLongitude = new ArrayList<String>();
+
+    double minDistanceMeters = 5.0; //rango de distance en metros
+    ArrayList<String> animalNameNearst = new ArrayList<String>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,18 +117,21 @@ public class CategoryActivity extends AppCompatActivity implements GoogleApiClie
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
 
-                final CategoryAdapter categoryAdapter = new CategoryAdapter(getApplicationContext(), grupoAnimales);
+                final CategoryAdapter categoryAdapter = new CategoryAdapter(getApplicationContext(), grupoAnimales, animalNameNearst);
 
                 GroupAnimals animal = grupoAnimales.get(position);
 
-                Intent i = new Intent(getApplicationContext(), CameraActivity.class);
-                i.putExtra("latitudes", animal.getLatitude());
-                i.putExtra("longitudes", animal.getLongitude());
-                startActivity(i);
+                if (animalNameNearst.contains(animal.getName())) {
+                    Intent i = new Intent(getApplicationContext(), CameraActivity.class);
+                    i.putExtra("latitudes", animal.getLatitude());
+                    i.putExtra("longitudes", animal.getLongitude());
+                    i.putExtra("name", animal.getName());
+                    startActivity(i);
 
-                // This tells the GridView to redraw itself
-                // in turn calling your BooksAdapter's getView method again for each cell
-                categoryAdapter.notifyDataSetChanged();
+                    // This tells the GridView to redraw itself
+                    // in turn calling your BooksAdapter's getView method again for each cell
+                    categoryAdapter.notifyDataSetChanged();
+                }
             }
         });
 
@@ -268,7 +281,7 @@ public class CategoryActivity extends AppCompatActivity implements GoogleApiClie
                                 Log.i(TAG, document.getId() + " => " + document.getData());
 
                                 Double latitude = Double.valueOf(document.getData().get("latitude").toString());
-                                Double longitude = Double.valueOf(document.getData().get("latitude").toString());
+                                Double longitude = Double.valueOf(document.getData().get("longitude").toString());
 
 
                                 arrayAnimals.add(new Animal(document.getData().get("name").toString(),
@@ -281,7 +294,68 @@ public class CategoryActivity extends AppCompatActivity implements GoogleApiClie
                             ArrayList<String> animalsSave = new ArrayList<String>();
                             Boolean continueProcess = true;
 
-                            for (Animal animal_name : arrayAnimals){
+                            for (int i = 0; i < arrayAnimals.size(); i ++){
+
+                                Log.i(TAG, "name: " + arrayAnimals.get(i).getName());
+
+                                continueProcess = true;
+                                String name = arrayAnimals.get(i).getName();
+
+                                //si el animal se encuentra en la lista de los animales procesados, activa flag para no continuar el proceso
+                                if (animalsSave.contains(name)) {
+                                    continueProcess = false;
+                                }
+
+                                ArrayList<Double> arrayLatitude = new ArrayList<Double>();
+                                ArrayList<Double> arrayLongitude = new ArrayList<Double>();
+                                for (int e = 0; e < arrayAnimals.size(); e ++){
+                                    //if (e != i) {
+
+                                        if (arrayAnimals.get(e).getName() == name){
+                                            double la = arrayAnimals.get(e).getLatitude();
+                                            double lo = arrayAnimals.get(e).getLongitude();
+                                            arrayLatitude.add(la);
+                                            arrayLongitude.add(lo);
+                                            double distanceKM = distanceBetweenTwoPoint(_latittude, _longitude, la, lo);
+                                            Log.i(TAG, "distance: " + distanceKM);
+                                            double distanceMeters = distanceKM * 1000;
+                                            if (distanceMeters <= minDistanceMeters) {
+                                                Log.i(TAG, "animal cercano: " + name);
+                                                if (!animalNameNearst.contains(name)){
+                                                    animalNameNearst.add(name);
+                                                }
+                                            }
+                                        }
+                                    //}
+                                }
+
+
+                                if (continueProcess) {
+                                    animalsSave.add(name);
+                                    Double[] a_latitude = new Double[arrayLatitude.size()];
+                                    Double[] a_longitude = new Double[arrayLongitude.size()];
+
+                                    Log.i(TAG, "list name: " + name);
+                                    Log.i(TAG, "list latitude: " + arrayLatitude.toString());
+                                    Log.i(TAG, "list longitude: " + arrayLongitude.toString());
+
+                                    for(int a = 0; a<arrayLatitude.size();a++){
+                                        a_latitude[a] = arrayLatitude.get(a);
+                                        a_longitude[a] = arrayLongitude.get(a);
+                                    }
+
+                                /*Double[] a_latitude = (Double[]) arrayLatitude.toArray();
+                                Double[] a_longitude = (Double[]) arrayLongitude.toArray();*/
+                                    grupoAnimales.add(new GroupAnimals(name,a_latitude, a_longitude));
+                                }
+
+                            }
+
+                            //-----------------------------------------------------
+
+                            /*for (Animal animal_name : arrayAnimals){
+
+                                Log.i(TAG, "name: " + animal_name.getName());
 
                                 continueProcess = true;
 
@@ -316,16 +390,17 @@ public class CategoryActivity extends AppCompatActivity implements GoogleApiClie
                                         a_longitude[i] = arrayLongitude.get(i);
                                     }
 
-                                /*Double[] a_latitude = (Double[]) arrayLatitude.toArray();
-                                Double[] a_longitude = (Double[]) arrayLongitude.toArray();*/
+
                                     grupoAnimales.add(new GroupAnimals(name,a_latitude, a_longitude));
                                 }
 
-                            }
+                            }*/
+
+                            Log.i(TAG, "animal: " + grupoAnimales.get(0).getLatitude().toString());
 
                             //Animal[] animals = (Animal[]) arrayAnimals.toArray();
 
-                            CategoryAdapter categoryAdapter = new CategoryAdapter(getApplicationContext(), grupoAnimales);
+                            CategoryAdapter categoryAdapter = new CategoryAdapter(getApplicationContext(), grupoAnimales, animalNameNearst);
                             gridView.setAdapter(categoryAdapter);
 
                             /*intent.putExtra("listName", arrayName);
@@ -607,5 +682,94 @@ public class CategoryActivity extends AppCompatActivity implements GoogleApiClie
 
                 break;
         }
+    }
+
+    //DISTANCE CONTROLLER
+    private void checkPlaceInRange(Double minDistance_meters){
+        Double minDistanceKm = minDistance_meters / 1000; //convertir metros a kilometros
+        Pair<String, Double> data = detectNearstPlaces();
+        if (data.second <= minDistanceKm) {
+            //esta en el rango
+            switch (data.first) {
+                case "fayh":
+                    Log.i(TAG, "Code: fayh");
+
+                case "come1":
+                    Log.i(TAG, "Code come1");
+
+                case "cien":
+                    Log.i(TAG, "Code: cien");
+
+                    //test
+                case "bom":
+                    Log.i(TAG, "code: bom");
+
+            }
+        }
+    }
+
+    private Pair<String, Double> detectNearstPlaces(){
+        String namePlaceNearst = "";
+        Double nearstDistance = 200.0; //distancia mas corta, valor random alto, medida en KM
+        for (int i = 0; i < arrayName.size(); i++){
+
+            Double endLatitude = Double.valueOf(arrayLatitude.get(i));
+            Double endLongitude = Double.valueOf(arrayLongitude.get(i));
+            Double distance = distanceBetweenTwoPoint(_latittude, _longitude, endLatitude, endLongitude);
+
+            if (distance < nearstDistance){
+                //la nueva distancia es mas pequena que la guardada
+                nearstDistance = distance;
+                namePlaceNearst = arrayName.get(i);
+            }
+        }
+
+        return new Pair<String, Double>(namePlaceNearst, nearstDistance);
+    }
+
+    public static double distanceBetweenTwoPoint(double startLat, double startLong,
+                                                 double endLat, double endLong){
+        //KM
+        return HaversineDistance.distance(startLat, startLong,
+                endLat, endLong);
+    }
+
+
+    //GRAYSCALE
+    public static Bitmap grayScaleImage(Bitmap src) {
+        // constant factors
+        final double GS_RED = 0.299;
+        final double GS_GREEN = 0.587;
+        final double GS_BLUE = 0.114;
+
+        // create output bitmap
+        Bitmap bmOut = Bitmap.createBitmap(src.getWidth(), src.getHeight(), src.getConfig());
+        // pixel information
+        int A, R, G, B;
+        int pixel;
+
+        // get image size
+        int width = src.getWidth();
+        int height = src.getHeight();
+
+        // scan through every single pixel
+        for(int x = 0; x < width; ++x) {
+            for(int y = 0; y < height; ++y) {
+                // get one pixel color
+                pixel = src.getPixel(x, y);
+                // retrieve color of all channels
+                A = Color.alpha(pixel);
+                R = Color.red(pixel);
+                G = Color.green(pixel);
+                B = Color.blue(pixel);
+                // take conversion up to one single value
+                R = G = B = (int)(GS_RED * R + GS_GREEN * G + GS_BLUE * B);
+                // set new pixel color to output bitmap
+                bmOut.setPixel(x, y, Color.argb(A, R, G, B));
+            }
+        }
+
+        // return final image
+        return bmOut;
     }
 }
