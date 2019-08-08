@@ -1,12 +1,17 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.ar.sceneform.plugin'
 
 android {
     compileSdkVersion 28
+    compileOptions{
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     buildToolsVersion "29.0.1"
     defaultConfig {
         applicationId "com.andreslab.digitalpark"
-        minSdkVersion 22
+        minSdkVersion 26
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -45,3 +50,25 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     implementation 'com.google.ar.sceneform.ux:sceneform-ux:1.6.0'
 }
+
+
+
+sceneform.asset('sampledata/models/wolf.fbx',
+        'default',
+        'sampledata/models/wolf.sfa',
+        'src/main/res/raw/wolf')
+
+sceneform.asset('sampledata/models/esfera.fbx',
+        'default',
+        'sampledata/models/esfera.sfa',
+        'src/main/res/raw/esfera')
+
+sceneform.asset('sampledata/models/esfera2.fbx',
+        'default',
+        'sampledata/models/esfera2.sfa',
+        'src/main/res/raw/esfera2')
+
+sceneform.asset('sampledata/models/sphere3.fbx',
+        'default',
+        'sampledata/models/sphere3.sfa',
+        'src/main/res/raw/sphere3')

@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -20,21 +21,35 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="MAMÍFERO"/>
+            android:text="MAMÍFERO" />
 
         <Button
             android:id="@+id/btnAves"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="AVES"/>
+            android:text="AVES" />
 
         <Button
             android:id="@+id/btnReptiles"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="REPTILES"/>
+            android:text="REPTILES" />
     </LinearLayout>
+
+
+    <ImageButton
+        android:id="@+id/btnCamera"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="50dp"
+        android:layout_weight="1"
+        android:background="@android:color/holo_blue_light"
+        android:src="@android:drawable/ic_menu_camera"
+        android:text="CAMERA"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout" />
 
 </android.support.constraint.ConstraintLayout>
