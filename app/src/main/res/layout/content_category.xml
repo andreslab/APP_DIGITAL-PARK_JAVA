@@ -12,12 +12,17 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="30dp"
         android:layout_height="50dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:layout_weight="1"
         android:background="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -37,15 +42,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:background="@color/colorOrange"
                 android:gravity="center"
                 android:text="MAMÏFEROS"
-                android:textSize="40dp"/>
+                android:textColor="@android:color/white"
+                android:textSize="40dp" />
         </LinearLayout>
 
         <GridView
             android:id="@+id/gridview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:columnWidth="100dp"
             android:gravity="center"

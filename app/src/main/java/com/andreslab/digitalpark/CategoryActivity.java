@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -42,6 +43,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.ar.core.ArCoreApk;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -77,6 +79,8 @@ public class CategoryActivity extends AppCompatActivity implements GoogleApiClie
 
     ArrayList<GroupAnimals> grupoAnimales = new ArrayList<GroupAnimals>();
 
+    Boolean ARCoreIsSupport;
+
     //---------------------------------
 
     private Location location;
@@ -101,10 +105,27 @@ public class CategoryActivity extends AppCompatActivity implements GoogleApiClie
     double minDistanceMeters = 5.0; //rango de distance en metros
     ArrayList<String> animalNameNearst = new ArrayList<String>();
 
+    void resetArrays(){
+        arrayName.clear();
+        arrayLatitude.clear();
+        arrayLongitude.clear();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        resetArrays();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
+
+        ARCoreIsSupport = false;
+
+        //maybeEnableArButton();
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         progressBar = findViewById(R.id.progressBar);
@@ -122,11 +143,21 @@ public class CategoryActivity extends AppCompatActivity implements GoogleApiClie
                 GroupAnimals animal = grupoAnimales.get(position);
 
                 if (animalNameNearst.contains(animal.getName())) {
-                    Intent i = new Intent(getApplicationContext(), CameraActivity.class);
-                    i.putExtra("latitudes", animal.getLatitude());
-                    i.putExtra("longitudes", animal.getLongitude());
-                    i.putExtra("name", animal.getName());
-                    startActivity(i);
+
+                    if (ARCoreIsSupport) {
+                        Intent i = new Intent(getApplicationContext(), CameraARCoreActivity.class);
+                        i.putExtra("latitudes", animal.getLatitude());
+                        i.putExtra("longitudes", animal.getLongitude());
+                        i.putExtra("name", animal.getName());
+                        startActivity(i);
+                    }else{
+                        Intent i = new Intent(getApplicationContext(), CameraActivity.class);
+                        i.putExtra("latitudes", animal.getLatitude());
+                        i.putExtra("longitudes", animal.getLongitude());
+                        i.putExtra("name", animal.getName());
+                        startActivity(i);
+                    }
+
 
                     // This tells the GridView to redraw itself
                     // in turn calling your BooksAdapter's getView method again for each cell
@@ -771,5 +802,26 @@ public class CategoryActivity extends AppCompatActivity implements GoogleApiClie
 
         // return final image
         return bmOut;
+    }
+
+    void maybeEnableArButton() {
+        ArCoreApk.Availability availability = ArCoreApk.getInstance().checkAvailability(this);
+        if (availability.isTransient()) {
+            // Re-query at 5Hz while compatibility is checked in the background.
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    maybeEnableArButton();
+                }
+            }, 200);
+        }
+        if (availability.isSupported()) {
+            Log.i(TAG, "Soporta ARCORE");
+            ARCoreIsSupport = true;
+            // indicator on the button.
+        } else { // Unsupported or unknown.
+            Log.i(TAG, "No Soporta ARCORE");
+            ARCoreIsSupport = false;
+        }
     }
 }

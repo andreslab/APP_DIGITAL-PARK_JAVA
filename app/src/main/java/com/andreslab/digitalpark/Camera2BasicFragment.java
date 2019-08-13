@@ -41,7 +41,11 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -402,9 +406,13 @@ public class Camera2BasicFragment extends Fragment
         return new Camera2BasicFragment();
     }
 
+
+    ShowGifView showGifView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.fragment_camera2_basic, container, false);
     }
 
@@ -413,6 +421,18 @@ public class Camera2BasicFragment extends Fragment
         view.findViewById(R.id.picture).setOnClickListener(this);
         view.findViewById(R.id.info).setOnClickListener(this);
         mTextureView = (AutoFitTextureView) view.findViewById(R.id.texture);
+
+        ShowGifView showGifView = new ShowGifView(view.getContext());
+
+        LinearLayout linearLayout = view.findViewById(R.id.layoutAnimateAnimal);
+        linearLayout.addView(showGifView);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
+        showGifView.setLayoutParams(layoutParams);
+
+        showGifView.setGifImageDrawableId(R.drawable.bird_2);
+        showGifView.drawGif();
+
     }
 
     @Override
