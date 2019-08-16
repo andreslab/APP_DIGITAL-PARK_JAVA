@@ -109,6 +109,7 @@ public class CategoryActivity extends AppCompatActivity implements GoogleApiClie
         arrayName.clear();
         arrayLatitude.clear();
         arrayLongitude.clear();
+        grupoAnimales.clear();
     }
 
     @Override
@@ -116,6 +117,7 @@ public class CategoryActivity extends AppCompatActivity implements GoogleApiClie
         super.onStop();
 
         resetArrays();
+
     }
 
     @Override
@@ -224,25 +226,25 @@ public class CategoryActivity extends AppCompatActivity implements GoogleApiClie
         switch (category) {
             case 0:
                 Log.i(TAG, "Category: MAMIFERO");
-                readPlacesFirestore();
                 cat = "Mamifero";
                 title.setText("MAMÍFERO");
+                readPlacesFirestore();
                 break;
             case 1:
                 Log.i(TAG, "Category: AVES");
-                readPlacesFirestore();
                 cat = "Aves";
                 title.setText("AVES");
+                readPlacesFirestore();
                 break;
             case 2:
                 Log.i(TAG, "Category: REPTILES");
-                readPlacesFirestore();
                 cat = "Reptiles";
                 title.setText("RÉPTILES");
+                readPlacesFirestore();
                 break;
         }
 
-        readPlacesFirestore();
+
     }
 
     private void resetParams(){
@@ -318,6 +320,7 @@ public class CategoryActivity extends AppCompatActivity implements GoogleApiClie
                                 arrayAnimals.add(new Animal(document.getData().get("name").toString(),
                                         latitude,
                                         longitude));
+
                             }
 
                             //ArrayList<GroupAnimals> grupoAnimales = new ArrayList<GroupAnimals>();

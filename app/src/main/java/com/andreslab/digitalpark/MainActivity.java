@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
     Button btn_mamifero;
     Button btn_ave;
     Button btn_reptil;
-    ImageButton btn_camera;
+    //ImageButton btn_camera;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         btn_mamifero = findViewById(R.id.btnMamifero);
         btn_ave = findViewById(R.id.btnAves);
         btn_reptil = findViewById(R.id.btnReptiles);
-        btn_camera = findViewById(R.id.btnCamera);
+        //btn_camera = findViewById(R.id.btnCamera);
 
         btn_mamifero.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,12 +51,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btn_camera.setOnClickListener(new View.OnClickListener() {
+        /*btn_camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), CameraARCoreActivity.class);
                 startActivity(i);
             }
-        });
+        });*/
     }
 }

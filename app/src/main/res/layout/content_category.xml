@@ -25,6 +25,7 @@
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="56dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,7 +35,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:layout_weight="2.5"
             android:orientation="horizontal">
 
             <TextView
@@ -46,7 +47,7 @@
                 android:gravity="center"
                 android:text="MAMÏFEROS"
                 android:textColor="@android:color/white"
-                android:textSize="40dp" />
+                android:textSize="50dp" />
         </LinearLayout>
 
         <GridView
@@ -55,6 +56,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
+            android:background="#00FFFFFF"
             android:columnWidth="100dp"
             android:gravity="center"
             android:horizontalSpacing="10dp"

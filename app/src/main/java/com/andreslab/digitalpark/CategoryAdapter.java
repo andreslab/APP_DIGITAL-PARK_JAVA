@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,8 @@ public class CategoryAdapter extends BaseAdapter {
         return dummyTextView;
     }*/
 
+    private static final String TAG = "Category list";
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // 1
@@ -69,9 +72,21 @@ public class CategoryAdapter extends BaseAdapter {
         // 4
 
         if (animalNameNearst.contains(animal.getName())) {
-            imageView.setImageResource(R.drawable.cocodrillo_min);
+            int idImg = mContext.getResources().getIdentifier("img_"+animal.getName()+"_min", "drawable", mContext.getPackageName());
+            Log.i(TAG, "imagen: "+"img_"+animal.getName()+"  codigo:  0");
+            if (idImg != 0) {
+                imageView.setImageResource(idImg);
+            }else{
+                imageView.setImageResource(R.drawable.not);
+            }
         }else {
-            imageView.setImageBitmap(grayScaleImage(BitmapFactory.decodeResource( mContext.getResources(), R.drawable.cocodrillo_min)));
+            int idImg = mContext.getResources().getIdentifier("img_"+animal.getName()+"_min", "drawable", mContext.getPackageName());
+            Log.i(TAG, "imagen: "+"img_"+animal.getName()+"  codigo:  "+idImg);
+            if (idImg != 0) {
+                imageView.setImageBitmap(grayScaleImage(BitmapFactory.decodeResource( mContext.getResources(),idImg)));
+            }else{
+                imageView.setImageBitmap(grayScaleImage(BitmapFactory.decodeResource( mContext.getResources(), R.drawable.not)));
+            }
         }
 
         nameTextView.setText(animal.getName());

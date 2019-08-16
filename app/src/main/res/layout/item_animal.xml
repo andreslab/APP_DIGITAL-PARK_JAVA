@@ -1,9 +1,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    >
+    android:gravity="center">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/parent_layout"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="0dp"
+        app:cardCornerRadius="8dp">
 
     <ImageView
         android:id="@+id/animal_img"
@@ -11,6 +19,9 @@
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"
         android:src="@drawable/cocodrillo_min"/>
+
+    </android.support.v7.widget.CardView>
+
 
     <TextView
         android:id="@+id/animal_name"
