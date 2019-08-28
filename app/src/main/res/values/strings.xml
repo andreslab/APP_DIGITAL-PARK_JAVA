@@ -21,4 +21,24 @@
 
         ]]>
     </string>
+
+    <string name="description_perezoso">
+        Su piel peluda y de color café, le sirve para camuflarse en el bosque. Tiene ojos muy redondos y pequeños. Sus uñas son fuertes, largas y en forma de garras. Sus largos brazos le permiten pasarse abrazado a los árboles. Anda tan despacio que parece estar quieto todo el tiempo; es de esta forma que evita ser visto por sus depredadores.
+    </string>
+    <string name="description_mapache">Estos enmascarados tienen un hocico puntiagudo y largos bigotes; pelaje café oscuro, cola rayada color crema y negro que forman anillos. Tienen patas de 5 dedos largos, las delanteras son muy hábiles, parecen manos. Gregarios, de habitos nocturnos, muy inteligentes, con excelente visión; se alimentan de frutos, insectos, cangrejos, peces, ranas y tortugas pequeñas.
+        </string>
+    <string name="description_mono">Los monos son vivaces, curiosos y traviesos. De brazos largos y cola prensil. Sus ojos atentos no se pierden ningún movimiento a su alrededor. Son gregarios, formando grupos entre 8 y 25 miembros llamados “patrullas”. Siempre están comunicándose con gritos o aullidos característicos que los mantienen en contacto. Se alimentan de frutos, vegetales y pequeños vertebrados.
+        </string>
+    <string name="description_pato">Los patos son un grupo diverso de aves amantes del agua. Todos son aves nadadoras con las patas palmeadas y un denso plumaje impermeabilizado con una capa subyacente velloso. Son aves muy comunicativas; usan su graznido para mantenerse unidos, para alertar al grupo si hay peligro o para llamar a su pareja.</string>
+    <string name="description_flamingo">
+        Su inconfundible plumaje rosado, alas rosadas; patas y cuello bien largos; tiene un gran pico encorvado hacia abajo. Sus ojos con el iris amarillo. Los juveniles son pálidos con rosado en las alas. Al chapotear agitan el lodo y con el pico cuelan los invertebrados de los acuáticos. Son gregarios. Corre distancias considerables para levantar el vuelo.</string>
+    <string name="description_aguila_harpia">
+        “Cunsi Pindo” la señora de los monos, es el nombre con el que la comunidad Cofán denomina al águila harpía, que vive en los bosques húmedos tropicales del Este de nuestro país. Son aves depredadoras y sus presas favoritas son mamíferos como monos y perezosos. Pueden llegar a medir un metro y la envergadura de sus alas sobrepasa los dos metros. La hembra es de mayor tamaño que el macho. Es una de las águilas más grandes y poderosas en el mundo. Es una especie que se encuentra en peligro de extinción.</string>
+    <string name="description_tortuga">
+        La tortuga mordedora es una especie que habitan comúnmente en los bosques de la provincia del Guayas. Las especies de tortugas en el Parque Histórico Guayaquil son principalmente carnívoras, aunque también se alimentan de algunos vegetales. Pueden vivir en hábitats acuáticos y terrestres, es por eso que siempre se las encuentra cerca de ríos o esteros.</string>
+    <string name="description_caiman_anteojos">
+        Tiene alrededor de sus ojos un arco de hueso que se parece al marco de unos anteojos, de ahí su nombre. Usualmente habita en lagos, estanques, humedades y afluentes de ríos donde la corriente no es rápida. Su piel está cubierta de escamas duras, color café/verduzco oscuro; tiene una cola larga y fuerte, con la que se impulsa para nadar. Se alimenta de peces, anfibios, reptiles, aves y pequeños mamíferos.</string>
+    <string name="description_cocodrilo">
+        De hocico alargado, muestra el cuarto colmillo de su mandíbula inferior al cerrarlo, así se lo diferencia de caimanes y aligátores. Habita en pantanos, ríos y manglares; puede medir más de 4,5 metros y los machos son más grandes que las hembras. El color dorsal de los cocodrilos adultos varía entre verde oliva, gris y marrón y su vientre es blanco.
+    </string>
 </resources>

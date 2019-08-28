@@ -153,9 +153,13 @@ public class CategoryActivity extends AppCompatActivity implements GoogleApiClie
                         i.putExtra("name", animal.getName());
                         startActivity(i);
                     }else{
-                        Intent i = new Intent(getApplicationContext(), CameraActivity.class);
+                        /*Intent i = new Intent(getApplicationContext(), CameraActivity.class);
                         i.putExtra("latitudes", animal.getLatitude());
                         i.putExtra("longitudes", animal.getLongitude());
+                        i.putExtra("name", animal.getName());
+                        startActivity(i);*/
+
+                        Intent i = new Intent(getApplicationContext(), PopUpActivity.class);
                         i.putExtra("name", animal.getName());
                         startActivity(i);
                     }
