@@ -8,45 +8,75 @@
     tools:context=".PopUpActivity">
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#00FFFFFF"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="#00FFFFFF"
             android:orientation="vertical">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Animal" />
+                android:layout_weight="3"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/description_flamingo" />
+                <ImageButton
+                    android:id="@+id/btn_camera"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="@android:color/transparent"
+                    android:src="@android:drawable/ic_menu_camera" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/title_detail_animal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="#00FFFFFF"
+                    android:gravity="center"
+                    android:text="Animal"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+                <ImageButton
+                    android:id="@+id/btn_close"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="@android:color/transparent"
+                    android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+            </LinearLayout>
 
             <ImageView
+                android:id="@+id/img_detail_animal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_weight="1.5" />
 
             <TextView
+                android:id="@+id/text_detail_animal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_weight="2"
+                android:background="#00FFFFFF"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:text="@string/description_cocodrilo"
+                android:textColor="#FCFCFC"
+                android:textSize="14sp" />
+
         </LinearLayout>
 
     </LinearLayout>
