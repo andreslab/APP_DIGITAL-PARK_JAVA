@@ -74,7 +74,8 @@ public class PopUpActivity extends Activity {
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), CameraActivity.class);
+                //Intent i = new Intent(getApplicationContext(), CameraActivity.class);
+                Intent i = new Intent(getApplicationContext(), SimpleCameraActivity.class);
                 i.putExtra("name", animal_name);
                 startActivity(i);
             }

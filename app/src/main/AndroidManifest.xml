@@ -21,10 +21,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
-            android:parentActivityName=".MenuActivity"/>
-        <activity android:name=".CreditActivity"
-            android:parentActivityName=".MenuActivity"/>
+        <activity android:name=".SimpleCameraActivity"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:parentActivityName=".MenuActivity" />
+        <activity
+            android:name=".CreditActivity"
+            android:parentActivityName=".MenuActivity" />
         <activity android:name=".PhotoActivity" />
         <activity
             android:name=".PopUpActivity"
@@ -39,7 +42,7 @@
             android:name=".CaptureActivity"
             android:label="@string/title_activity_capture"
             android:parentActivityName=".CategoryActivity" />
-        <activity android:name=".CameraActivity"/>
+        <activity android:name=".CameraActivity" />
         <activity
             android:name=".DetailActivity"
             android:label="@string/title_activity_detail"
@@ -48,7 +51,6 @@
             android:name=".CategoryActivity"
             android:label="@string/title_activity_category"
             android:parentActivityName=".MainActivity" />
-
         <activity android:name=".MenuActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

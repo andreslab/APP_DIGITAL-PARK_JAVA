@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.camerakit.CameraKitView
+        android:id="@+id/camera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:keepScreenOn="true"
+        app:camera_flash="auto"
+        app:camera_facing="back"
+        app:camera_focus="continuous"
+        app:camera_permissions="camera" />
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/layoutAnimal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/control"
+        android:layout_alignStart="@+id/camera"
+        android:layout_alignTop="@+id/camera"
+        android:layout_alignEnd="@+id/camera"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="200dp" />
+
+
+    <FrameLayout
+        android:id="@+id/control"
+        android:layout_width="match_parent"
+        android:layout_height="112dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/darker_gray">
+
+        <ImageButton
+            android:id="@+id/info"
+            style="@android:style/Widget.Material.Light.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:contentDescription="Info"
+            android:padding="20dp"
+            android:src="@android:drawable/ic_dialog_info" />
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/simple_camera_take_picture"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignStart="@+id/camera"
+        android:layout_alignEnd="@+id/camera"
+        android:layout_alignBottom="@+id/control"
+        android:layout_gravity="center"
+        android:layout_marginStart="155dp"
+        android:layout_marginEnd="155dp"
+        android:layout_marginBottom="47dp"
+        android:background="@drawable/round_btn" />
+
+</RelativeLayout>
