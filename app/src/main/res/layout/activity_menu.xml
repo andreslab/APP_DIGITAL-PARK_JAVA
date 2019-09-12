@@ -18,36 +18,36 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/btnMamifero"
+            android:id="@+id/btnInit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/colorOrange"
-            android:text="MAMÍFERO"
+            android:text="INICIO"
             android:textColor="#FFFFFF"
             android:textSize="40sp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"/>
 
         <Button
-            android:id="@+id/btnAves"
+            android:id="@+id/btnCredit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/colorOrange"
-            android:text="AVES"
+            android:text="CREDITOS"
             android:textColor="@android:color/white"
             android:textSize="40sp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"/>
 
         <Button
-            android:id="@+id/btnReptiles"
+            android:id="@+id/btnExit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/colorOrange"
-            android:text="REPTILES"
+            android:text="SALIR"
             android:textColor="@android:color/white"
             android:textSize="40sp"
             android:layout_marginTop="10dp"

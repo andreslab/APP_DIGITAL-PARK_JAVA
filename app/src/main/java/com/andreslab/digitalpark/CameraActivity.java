@@ -10,6 +10,7 @@ import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -105,6 +106,9 @@ public class CameraActivity extends AppCompatActivity implements GoogleApiClient
 
 
         resetParams();
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Captura");
 
 
 

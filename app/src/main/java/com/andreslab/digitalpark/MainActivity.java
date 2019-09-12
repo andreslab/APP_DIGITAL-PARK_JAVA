@@ -1,6 +1,7 @@
 package com.andreslab.digitalpark;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -51,12 +52,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*btn_camera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), CameraARCoreActivity.class);
-                startActivity(i);
-            }
-        });*/
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Categorias");
     }
 }

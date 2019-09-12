@@ -6,8 +6,11 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.graphics.Point;
@@ -47,6 +50,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -61,6 +65,9 @@ import java.util.concurrent.TimeUnit;
 
 public class Camera2BasicFragment extends Fragment
         implements View.OnClickListener, ActivityCompat.OnRequestPermissionsResultCallback {
+
+
+    Context mcontext;
 
     /**
      * Conversion from screen rotation to JPEG orientation.
@@ -231,7 +238,12 @@ public class Camera2BasicFragment extends Fragment
 
         @Override
         public void onImageAvailable(ImageReader reader) {
+
+            //save background
             mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), mFile));
+
+            //previewPhoto(reader);
+
         }
 
     };
@@ -277,10 +289,13 @@ public class Camera2BasicFragment extends Fragment
         private void process(CaptureResult result) {
             switch (mState) {
                 case STATE_PREVIEW: {
+                    Log.i("capture","......STATE_PREVIEW.....");
                     // We have nothing to do when the camera preview is working normally.
+
                     break;
                 }
                 case STATE_WAITING_LOCK: {
+                    Log.i("capture","......STATE_WAITING_LOCK.....");
                     Integer afState = result.get(CaptureResult.CONTROL_AF_STATE);
                     if (afState == null) {
                         captureStillPicture();
@@ -299,6 +314,7 @@ public class Camera2BasicFragment extends Fragment
                     break;
                 }
                 case STATE_WAITING_PRECAPTURE: {
+                    Log.i("capture","......STATE_WAITING_PRECAPTURE.....");
                     // CONTROL_AE_STATE can be null on some devices
                     Integer aeState = result.get(CaptureResult.CONTROL_AE_STATE);
                     if (aeState == null ||
@@ -309,6 +325,7 @@ public class Camera2BasicFragment extends Fragment
                     break;
                 }
                 case STATE_WAITING_NON_PRECAPTURE: {
+                    Log.i("capture","......STATE_WAITING_NON_PRECAPTURE.....");
                     // CONTROL_AE_STATE can be null on some devices
                     Integer aeState = result.get(CaptureResult.CONTROL_AE_STATE);
                     if (aeState == null || aeState != CaptureResult.CONTROL_AE_STATE_PRECAPTURE) {
@@ -423,6 +440,8 @@ public class Camera2BasicFragment extends Fragment
         mTextureView = (AutoFitTextureView) view.findViewById(R.id.texture);
 
         ShowGifView showGifView = new ShowGifView(view.getContext());
+
+        mcontext = view.getContext();
 
         LinearLayout linearLayout = view.findViewById(R.id.layoutAnimateAnimal);
         linearLayout.addView(showGifView);
@@ -598,6 +617,8 @@ public class Camera2BasicFragment extends Fragment
             ErrorDialog.newInstance(getString(R.string.camera_error))
                     .show(getChildFragmentManager(), FRAGMENT_DIALOG);
         }
+
+        previewPhoto(mImageReader);
     }
 
     /**
@@ -853,6 +874,25 @@ public class Camera2BasicFragment extends Fragment
         }
     }
 
+    private void previewPhoto(ImageReader reader){
+
+        Log.i("Photo","...... Photo Activity ......");
+        Image mImage = reader.acquireNextImage();
+
+        ByteBuffer buffer = mImage.getPlanes()[0].getBuffer();
+        byte[] bytes = new byte[buffer.remaining()];
+        buffer.get(bytes);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                    //mImageView.setImageBitmap(bitmap);
+
+        //other activity
+        Intent i = new Intent(getActivity(), PhotoActivity.class);
+        ByteArrayOutputStream bs = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 50, bs);
+        i.putExtra("byteArray", bs.toByteArray());
+        startActivity(i);
+    }
+
     /**
      * Retrieves the JPEG orientation from the specified screen rotation.
      *
@@ -911,7 +951,8 @@ public class Camera2BasicFragment extends Fragment
     private void setAutoFlash(CaptureRequest.Builder requestBuilder) {
         if (mFlashSupported) {
             requestBuilder.set(CaptureRequest.CONTROL_AE_MODE,
-                    CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH);
+                    CaptureRequest.CONTROL_AE_MODE_OFF);
+            //CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH
         }
     }
 
