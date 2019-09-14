@@ -2,9 +2,12 @@ package com.andreslab.digitalpark;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.media.Image;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
@@ -21,6 +24,7 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Random;
 
 public class PhotoActivity extends AppCompatActivity {
@@ -49,7 +53,9 @@ public class PhotoActivity extends AppCompatActivity {
             byte[] photo = extras.getByteArray("image");
             Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
             // Set the Bitmap data to the ImageView
-            imageView.setImageBitmap(bmp);
+
+            Bitmap new_bmp = combineImages(bmp,bmp);
+            imageView.setImageBitmap(new_bmp);
         }else{
             Toast.makeText(getApplicationContext(), "A ocurrido un problema con la imagen", Toast.LENGTH_SHORT).show();
         }
@@ -60,9 +66,29 @@ public class PhotoActivity extends AppCompatActivity {
                 byte[] photo = extras.getByteArray("image");
                 Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
 
-                saveImageToExternalStorage(bmp);
 
-                Toast.makeText(PhotoActivity.this, "Foto guardada", Toast.LENGTH_SHORT).show();
+                saveToInternalStorage(bmp);
+
+
+                //saveImageToExternalStorage(bmp);
+                /*File picture_file = getOutputMediaFile();
+                if (picture_file == null){
+                    return;
+                }else{
+                    try{
+                        FileOutputStream fos = new FileOutputStream(picture_file);
+                        fos.write(photo);
+                        fos.close();
+
+                        Toast.makeText(PhotoActivity.this, "Foto guardada", Toast.LENGTH_SHORT).show();
+
+                    }catch(IOException e){
+                        e.printStackTrace();
+                        Toast.makeText(PhotoActivity.this, "Error al guardar foto", Toast.LENGTH_SHORT).show();
+
+                    }
+                }*/
+
                 finish();
             }
         });
@@ -84,6 +110,51 @@ public class PhotoActivity extends AppCompatActivity {
 
 
 
+    }
+
+    //guardar foto en memoria interna
+    private String saveToInternalStorage(Bitmap bitmapImage){
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        if (!directory.exists()){
+            directory.mkdir();
+        }
+        // Create imageDir
+        File mypath=new File(directory,"profile.jpg");
+
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return directory.getAbsolutePath();
+    }
+
+    //guardar foto en memoria externa MICRO SD
+    private File getOutputMediaFile(){
+        String state = Environment.getExternalStorageState();
+        if(!state.equals(Environment.MEDIA_MOUNTED)){
+            return null;
+        }else{
+            //File folder_gui = new File(Environment.getExternalStorageDirectory() + File.separator + "GUI");
+            File folder_gui = new File(Environment.getExternalStorageDirectory() + File.separator + "GUI");
+            if (!folder_gui.exists()){
+                folder_gui.mkdir();
+            }
+
+            File outputFile = new File(folder_gui, "temp.jpg");
+            return outputFile;
+        }
     }
 
     private void saveImageToExternalStorage(Bitmap finalBitmap) {
@@ -118,5 +189,30 @@ public class PhotoActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+
+    public Bitmap combineImages(Bitmap c, Bitmap s)
+    {
+        Bitmap cs = null;
+
+        int width, height = 0;
+
+        if(c.getWidth() > s.getWidth()) {
+            width = c.getWidth() + s.getWidth();
+            height = c.getHeight();
+        } else {
+            width = s.getWidth() + s.getWidth();
+            height = c.getHeight();
+        }
+
+        cs = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+
+        Canvas comboImage = new Canvas(cs);
+
+        comboImage.drawBitmap(c, 0f, 0f, null);
+        comboImage.drawBitmap(s, c.getWidth(), 0f, null);
+
+        return cs;
     }
 }

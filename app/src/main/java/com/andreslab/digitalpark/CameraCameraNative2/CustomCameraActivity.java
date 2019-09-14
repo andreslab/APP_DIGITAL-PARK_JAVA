@@ -2,6 +2,7 @@ package com.andreslab.digitalpark.CameraCameraNative2;
 
 import android.content.Intent;
 import android.hardware.Camera;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.LinearLayout;
 import com.andreslab.digitalpark.PhotoActivity;
 import com.andreslab.digitalpark.R;
 import com.andreslab.digitalpark.ShowGifView;
+
+import java.io.File;
 
 public class CustomCameraActivity extends AppCompatActivity {
 
@@ -68,12 +71,7 @@ public class CustomCameraActivity extends AppCompatActivity {
             Intent i = new Intent(getApplicationContext(), PhotoActivity.class);
             i.putExtra("image", data);
             startActivity(i);
+            finish();
         }
     };
-
-    /*public void capturePicture(View view){
-        if (camera != null){
-            camera.takePicture(null,null,mPictureCallback);
-        }
-    }*/
 }
