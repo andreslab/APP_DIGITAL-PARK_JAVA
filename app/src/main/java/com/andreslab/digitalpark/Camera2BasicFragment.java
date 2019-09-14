@@ -49,6 +49,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.protobuf.ByteString;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -236,13 +237,101 @@ public class Camera2BasicFragment extends Fragment
     private final ImageReader.OnImageAvailableListener mOnImageAvailableListener
             = new ImageReader.OnImageAvailableListener() {
 
+        private List<ByteString> mImages;
+        private int mTotal = 20;
+
         @Override
         public void onImageAvailable(ImageReader reader) {
 
             //save background
-            mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), mFile));
+            //mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), mFile));
 
-            //previewPhoto(reader);
+
+
+            Image image = null;
+            try {
+                image = reader.acquireLatestImage();
+                ByteBuffer buffer = image.getPlanes()[0].getBuffer();
+                byte[] imageBytes = new byte[buffer.remaining()];
+                buffer.get(imageBytes);
+                Bitmap bmp = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+                //final String text = runModel(bitmap);
+                /*getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        textView.setText(text);
+
+                    }
+                });*/
+
+
+                //convert bitmap to []bytes
+
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bmp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
+                bmp.recycle();
+
+                //previewPhoto(reader);
+                /*getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent i = new Intent(getContext(), PhotoActivity.class);
+                        i.putExtra("image", byteArray);
+                        startActivity(i);
+                    }
+                });*/
+
+                Intent i = new Intent(getContext(), PhotoActivity.class);
+                //i.putExtra("image", byteArray);
+                startActivity(i);
+
+
+
+            } finally {
+                if (image != null) {
+                    image.close();
+                }
+            }
+
+
+
+
+            /*Image image = null;
+            try {
+                image = reader.acquireLatestImage();
+                ByteBuffer buffer = image.getPlanes()[0].getBuffer();
+                byte[] bytes = new byte[buffer.capacity()];
+                buffer.get(bytes);
+                mImages.add(ByteString.copyFrom(bytes));
+                Toast.makeText(mcontext, String.valueOf(mImages.size()) + "/" + String.valueOf(mTotal), Toast.LENGTH_SHORT).show();
+
+                if(mImages.size() >= mTotal) {
+                    Toast.makeText(mcontext, showToast(String.valueOf("Calibrating..."));
+
+
+                    //convert bitmap to []bytes
+                    Bitmap bmp =
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    byte[] byteArray = stream.toByteArray();
+                    bmp.recycle();
+
+
+
+                    //previewPhoto(reader);
+                    Intent i = new Intent(getContext(), PhotoActivity.class);
+                    i.putExtra("image", byteArray);
+                    startActivity(i);
+
+                }
+
+            } finally {
+                if (image != null) {
+                    image.close();
+                }
+            }*/
+
 
         }
 

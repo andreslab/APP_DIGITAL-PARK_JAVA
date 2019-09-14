@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.util.Log;
+import android.view.InputEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +72,14 @@ public class CategoryAdapter extends BaseAdapter {
         final TextView nameTextView = (TextView)convertView.findViewById(R.id.animal_name);
         // 4
 
+        nameTextView.setText(animal.getName().toUpperCase());
+
         if (animalNameNearst.contains(animal.getName())) {
+            if (animal.getName().contains(" ")){
+                animal.setName(animal.getName().replace(" ", "_"));
+            }
+            animal.setName(eliminarAcentos(animal.getName()));
+
             int idImg = mContext.getResources().getIdentifier("img_"+animal.getName()+"_min", "drawable", mContext.getPackageName());
             Log.i(TAG, "imagen: "+"img_"+animal.getName()+"  codigo:  0");
             if (idImg != 0) {
@@ -80,6 +88,11 @@ public class CategoryAdapter extends BaseAdapter {
                 imageView.setImageResource(R.drawable.not);
             }
         }else {
+            if (animal.getName().contains(" ")){
+                animal.setName(animal.getName().replace(" ", "_"));
+            }
+            animal.setName(eliminarAcentos(animal.getName()));
+
             int idImg = mContext.getResources().getIdentifier("img_"+animal.getName()+"_min", "drawable", mContext.getPackageName());
             Log.i(TAG, "imagen: "+"img_"+animal.getName()+"  codigo:  "+idImg);
             if (idImg != 0) {
@@ -89,10 +102,28 @@ public class CategoryAdapter extends BaseAdapter {
             }
         }
 
-        nameTextView.setText(animal.getName());
+
 
 
         return convertView;
+    }
+
+    public static String eliminarAcentos(String str) {
+
+        final String ORIGINAL = "ÁáÉéÍíÓóÚúÑñÜü";
+        final String REEMPLAZO = "AaEeIiOoUuNnUu";
+
+        if (str == null) {
+            return null;
+        }
+        char[] array = str.toCharArray();
+        for (int indice = 0; indice < array.length; indice++) {
+            int pos = ORIGINAL.indexOf(array[indice]);
+            if (pos > -1) {
+                array[indice] = REEMPLAZO.charAt(pos);
+            }
+        }
+        return new String(array);
     }
 
     //GRAYSCALE

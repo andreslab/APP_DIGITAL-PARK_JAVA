@@ -16,6 +16,8 @@
         app:camera_permissions="camera" />
 
 
+
+
     <LinearLayout
         android:orientation="vertical"
         android:id="@+id/layoutAnimal"
