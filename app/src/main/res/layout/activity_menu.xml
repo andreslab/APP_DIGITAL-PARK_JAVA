@@ -35,7 +35,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/colorOrange"
-            android:text="CREDITOS"
+            android:text="CRÉDITOS"
             android:textColor="@android:color/white"
             android:textSize="40sp"
             android:layout_marginTop="10dp"

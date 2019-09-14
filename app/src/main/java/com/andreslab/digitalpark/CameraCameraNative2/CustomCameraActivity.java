@@ -36,6 +36,7 @@ public class CustomCameraActivity extends AppCompatActivity {
     String animalName = "";
 
     ImageView imageViewAnimal;
+    ShowGifView showGifView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,12 +58,6 @@ public class CustomCameraActivity extends AppCompatActivity {
         checkCameraPermission();
 
 
-        //open Camera
-        camera = Camera.open();
-        showCamera = new ShowCamera(this, camera);
-
-        frameLayout.addView(showCamera);
-
         btnTakePicure = (Button)findViewById(R.id.btn_custom_camera_take_picture);
 
 
@@ -77,7 +72,7 @@ public class CustomCameraActivity extends AppCompatActivity {
 
 
         //load gift
-        ShowGifView showGifView = new ShowGifView(getApplicationContext());
+        showGifView = new ShowGifView(getApplicationContext());
 
         LinearLayout linearLayout = findViewById(R.id.layoutAnimal);
         linearLayout.addView(showGifView);
@@ -87,9 +82,6 @@ public class CustomCameraActivity extends AppCompatActivity {
 
         /*showGifView.setGifImageDrawableId(R.drawable.bird_2);
         showGifView.drawGif();*/
-
-        int idAnimal = this.getResources().getIdentifier(animalName+"_gift", "drawable", this.getPackageName());
-        imageViewAnimal.setImageResource(idAnimal);
 
     }
 
@@ -109,6 +101,25 @@ public class CustomCameraActivity extends AppCompatActivity {
     private final String TAG = "Debug_MainActivity";
 
 
+    public void activateCamera(){
+        //open Camera
+        camera = Camera.open();
+        showCamera = new ShowCamera(this, camera);
+
+        frameLayout.addView(showCamera);
+
+        if (animalName == "paloma"){
+            imageViewAnimal.setVisibility(View.INVISIBLE);
+            showGifView.setGifImageDrawableId(R.drawable.bird_2);
+            showGifView.drawGif();
+        }else{
+            int idAnimal = this.getResources().getIdentifier(animalName+"_gift", "drawable", this.getPackageName());
+            imageViewAnimal.setImageResource(idAnimal);
+        }
+
+    }
+
+
 
     private final int MY_PERMISSIONS_REQUEST_USE_CAMERA = 0x00AF;
     private void checkCameraPermission(){
@@ -118,6 +129,8 @@ public class CustomCameraActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_USE_CAMERA);
         } else {
             Log.d(TAG,"Permission has already granted");
+            activateCamera();
+
         }
     }
 
@@ -130,6 +143,7 @@ public class CustomCameraActivity extends AppCompatActivity {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Log.d(TAG,"permission was granted! Do your stuff");
+                    activateCamera();
                 } else {
                     Log.d(TAG,"permission denied! Disable the function related with permission.");
                 }
@@ -137,4 +151,7 @@ public class CustomCameraActivity extends AppCompatActivity {
             }
         }
     }
+
+
+
 }

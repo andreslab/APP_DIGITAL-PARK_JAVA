@@ -78,7 +78,7 @@ public class PopUpActivity extends Activity {
                 Intent i = new Intent(getApplicationContext(), CustomCameraActivity.class);
                 i.putExtra("animal_name", animal_name);
                 startActivity(i);
-                finish();
+                //finish();
             }
         });
 

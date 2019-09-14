@@ -58,6 +58,8 @@ public class CategoryActivity extends AppCompatActivity implements GoogleApiClie
     Context context = this;
     FloatingActionButton fab;
 
+    Boolean executeFisrtTime = false;
+
     ProgressBar progressBar;
     GridView gridView;
     TextView title;
@@ -98,7 +100,7 @@ public class CategoryActivity extends AppCompatActivity implements GoogleApiClie
     ArrayList<String> arrayLatitude = new ArrayList<String>();
     ArrayList<String> arrayLongitude = new ArrayList<String>();
 
-    double minDistanceMeters = 7.0; //rango de distance en metros
+    double minDistanceMeters = 10.0; //rango de distance en metros
     ArrayList<String> animalNameNearst = new ArrayList<String>();
 
     void resetArrays(){
@@ -124,6 +126,7 @@ public class CategoryActivity extends AppCompatActivity implements GoogleApiClie
         ARCoreIsSupport = false;
 
         //maybeEnableArButton();
+        executeFisrtTime = false; //to execute read data from firebase
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         progressBar = findViewById(R.id.progressBar);
@@ -239,7 +242,7 @@ public class CategoryActivity extends AppCompatActivity implements GoogleApiClie
             case 2:
                 Log.i(TAG, "Category: REPTILES");
                 cat = "Reptiles";
-                title.setText("RÉPTILES");
+                title.setText("REPTILES");
                 readPlacesFirestore();
                 break;
         }
@@ -516,7 +519,7 @@ public class CategoryActivity extends AppCompatActivity implements GoogleApiClie
 
     private void showAlertToSaveName(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Ingrese el nombre del lugar");
+        builder.setTitle("Ingrese el animal");
 
 // Set up the input
         final EditText input = new EditText(this);
@@ -528,7 +531,7 @@ public class CategoryActivity extends AppCompatActivity implements GoogleApiClie
         builder.setPositiveButton("Guardar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                _namePlace = input.getText().toString();
+                _namePlace = input.getText().toString().toLowerCase();
                 //fetchLocation();
                 savePlaceFirestore(_latittude, _longitude, _namePlace);
 
@@ -549,8 +552,9 @@ public class CategoryActivity extends AppCompatActivity implements GoogleApiClie
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if(requestCode == MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION){
             if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                //abc
+                readPlacesFirestore();
             }else{
+                Toast.makeText(context, "Faltan permisos de localización", Toast.LENGTH_SHORT).show();
             }
         }
     }*/
@@ -641,6 +645,10 @@ public class CategoryActivity extends AppCompatActivity implements GoogleApiClie
             _latittude = location.getLatitude();
             _longitude = location.getLongitude();
             activeBtnSave();
+            if (!executeFisrtTime) {
+                readPlacesFirestore();
+                executeFisrtTime = true;
+            }
             Log.i(TAG, "Latitude : " + location.getLatitude() + "\nLongitude : " + location.getLongitude());
             //locationTv.setText("Latitude : " + location.getLatitude() + "\nLongitude : " + location.getLongitude());
         }
@@ -678,6 +686,10 @@ public class CategoryActivity extends AppCompatActivity implements GoogleApiClie
             _latittude = location.getLatitude();
             _longitude = location.getLongitude();
             activeBtnSave();
+            if (!executeFisrtTime) {
+                readPlacesFirestore();
+                executeFisrtTime = true;
+            }
             Log.i(TAG, "Latitude : " + location.getLatitude() + "\nLongitude : " + location.getLongitude());
             //locationTv.setText("Latitude : " + location.getLatitude() + "\nLongitude : " + location.getLongitude());
         }
@@ -694,6 +706,7 @@ public class CategoryActivity extends AppCompatActivity implements GoogleApiClie
                 }
 
                 if (permissionsRejected.size() > 0) {
+                    Toast.makeText(context, "Faltan permisos de localización", Toast.LENGTH_SHORT).show();
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         if (shouldShowRequestPermissionRationale(permissionsRejected.get(0))) {
                             new AlertDialog.Builder(CategoryActivity.this).

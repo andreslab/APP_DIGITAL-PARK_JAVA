@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Digital Park</string>
+    <string name="app_name">Parque Digital</string>
     <string name="title_activity_category">CategoryActivity</string>
     <string name="title_activity_detail">DetailActivity</string>
     <string name="title_activity_capture">CaptureActivity</string>

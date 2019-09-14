@@ -75,7 +75,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="4"
                 android:gravity="center"
-                android:text="Desarrollado por Xavier Aguilar Calvache. Componente práctico previo a la obtención del título de Ingeniero en Producción y Dirección en Artes Multimedia"
+                android:text="Desarrollado por Xavier Aguilar Calvache. \nComponente práctico previo a la obtención del título de Ingeniero en Producción y Dirección en Artes Multimedia"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
                 android:textSize="18sp" />
