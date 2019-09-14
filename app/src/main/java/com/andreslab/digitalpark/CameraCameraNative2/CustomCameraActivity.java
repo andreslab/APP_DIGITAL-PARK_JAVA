@@ -1,11 +1,18 @@
 package com.andreslab.digitalpark.CameraCameraNative2;
 
+import android.content.Intent;
 import android.hardware.Camera;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
+import com.andreslab.digitalpark.PhotoActivity;
 import com.andreslab.digitalpark.R;
+import com.andreslab.digitalpark.ShowGifView;
 
 public class CustomCameraActivity extends AppCompatActivity {
 
@@ -13,6 +20,8 @@ public class CustomCameraActivity extends AppCompatActivity {
     FrameLayout frameLayout;
 
     ShowCamera showCamera;
+
+    Button btnTakePicure;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,5 +35,45 @@ public class CustomCameraActivity extends AppCompatActivity {
 
         frameLayout.addView(showCamera);
 
+        btnTakePicure = (Button)findViewById(R.id.btn_custom_camera_take_picture);
+
+
+        btnTakePicure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (camera != null){
+                    camera.takePicture(null,null,mPictureCallback);
+                }
+            }
+        });
+
+
+        //load gift
+        ShowGifView showGifView = new ShowGifView(getApplicationContext());
+
+        LinearLayout linearLayout = findViewById(R.id.layoutAnimal);
+        linearLayout.addView(showGifView);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
+        showGifView.setLayoutParams(layoutParams);
+
+        showGifView.setGifImageDrawableId(R.drawable.bird_2);
+        showGifView.drawGif();
+
     }
+
+    Camera.PictureCallback mPictureCallback = new Camera.PictureCallback() {
+        @Override
+        public void onPictureTaken(byte[] data, Camera camera) {
+            Intent i = new Intent(getApplicationContext(), PhotoActivity.class);
+            i.putExtra("image", data);
+            startActivity(i);
+        }
+    };
+
+    /*public void capturePicture(View view){
+        if (camera != null){
+            camera.takePicture(null,null,mPictureCallback);
+        }
+    }*/
 }

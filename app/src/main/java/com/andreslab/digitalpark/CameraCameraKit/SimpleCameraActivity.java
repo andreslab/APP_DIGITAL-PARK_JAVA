@@ -13,7 +13,6 @@ import com.andreslab.digitalpark.PhotoActivity;
 import com.andreslab.digitalpark.R;
 import com.andreslab.digitalpark.ShowGifView;
 import com.camerakit.CameraKitView;
-import com.jpegkit.Jpeg;
 import com.jpegkit.JpegImageView;
 
 public class SimpleCameraActivity extends AppCompatActivity {
@@ -27,7 +26,7 @@ public class SimpleCameraActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simple_camera);
         cameraKitView = findViewById(R.id.camera);
-        btnTakePicture = findViewById(R.id.simple_camera_take_picture);
+        btnTakePicture = findViewById(R.id.btn_custom_camera_take_picture);
 
         btnTakePicture.setOnClickListener(photoOnClickListener);
 
