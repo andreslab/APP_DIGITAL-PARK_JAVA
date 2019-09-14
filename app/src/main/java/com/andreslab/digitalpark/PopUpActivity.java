@@ -2,21 +2,20 @@ package com.andreslab.digitalpark;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
-import android.hardware.display.DisplayManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.andreslab.digitalpark.CameraCameraKit.SimpleCameraActivity;
+import com.andreslab.digitalpark.CameraCameraNative2.CustomCameraActivity;
 
 public class PopUpActivity extends Activity {
 
@@ -75,7 +74,8 @@ public class PopUpActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //Intent i = new Intent(getApplicationContext(), CameraActivity.class);
-                Intent i = new Intent(getApplicationContext(), SimpleCameraActivity.class);
+                //Intent i = new Intent(getApplicationContext(), SimpleCameraActivity.class);
+                Intent i = new Intent(getApplicationContext(), CustomCameraActivity.class);
                 i.putExtra("name", animal_name);
                 startActivity(i);
             }

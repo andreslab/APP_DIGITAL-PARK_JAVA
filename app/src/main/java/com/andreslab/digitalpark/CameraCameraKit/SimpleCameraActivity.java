@@ -1,4 +1,4 @@
-package com.andreslab.digitalpark;
+package com.andreslab.digitalpark.CameraCameraKit;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.andreslab.digitalpark.PhotoActivity;
+import com.andreslab.digitalpark.R;
+import com.andreslab.digitalpark.ShowGifView;
 import com.camerakit.CameraKitView;
 import com.jpegkit.Jpeg;
 import com.jpegkit.JpegImageView;

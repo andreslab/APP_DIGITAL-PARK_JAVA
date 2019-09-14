@@ -1,4 +1,4 @@
-package com.andreslab.digitalpark;
+package com.andreslab.digitalpark.CameraCameraNative1;
 
 import android.Manifest;
 import android.app.Activity;
@@ -44,11 +44,12 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import com.andreslab.digitalpark.PhotoActivity;
+import com.andreslab.digitalpark.R;
+import com.andreslab.digitalpark.ShowGifView;
 import com.google.protobuf.ByteString;
 
 import java.io.ByteArrayOutputStream;

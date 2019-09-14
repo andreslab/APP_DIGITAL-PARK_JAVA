@@ -1,4 +1,4 @@
-package com.andreslab.digitalpark;
+package com.andreslab.digitalpark.CameraCameraNative1;
 
 
 import android.content.Context;

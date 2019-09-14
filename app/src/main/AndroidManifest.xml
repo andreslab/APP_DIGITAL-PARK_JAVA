@@ -21,7 +21,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SimpleCameraActivity" />
+        <activity android:name=".CameraCameraNative2.CustomCameraActivity"></activity>
+        <activity android:name=".CameraCameraKit.SimpleCameraActivity" />
         <activity
             android:name=".MainActivity"
             android:parentActivityName=".MenuActivity" />
@@ -37,12 +38,8 @@
             android:name="com.google.ar.core"
             android:value="required" />
 
-        <activity android:name=".CameraARCoreActivity" />
-        <activity
-            android:name=".CaptureActivity"
-            android:label="@string/title_activity_capture"
-            android:parentActivityName=".CategoryActivity" />
-        <activity android:name=".CameraActivity" />
+        <activity android:name=".CameraARCore.CameraARCoreActivity" />
+        <activity android:name=".CameraCameraNative1.CameraActivity" />
         <activity
             android:name=".DetailActivity"
             android:label="@string/title_activity_detail"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000"
-    tools:context=".CameraActivity" >
+    tools:context=".CameraCameraNative1.CameraActivity" >
     <fragment
         android:id="@+id/sceneform_ux_fragment"
         android:name="com.google.ar.sceneform.ux.ArFragment"

@@ -3,26 +3,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.andreslab.digitalpark.CameraCameraNative1.AutoFitTextureView
-        android:id="@+id/texture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+    <FrameLayout
+        android:id="@+id/custom_camera"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:keepScreenOn="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="100dp"
+         />
+
+
 
     <LinearLayout
         android:orientation="vertical"
-        android:id="@+id/layoutAnimateAnimal"
+        android:id="@+id/layoutAnimal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/control"
-        android:layout_alignStart="@+id/texture"
-        android:layout_alignTop="@+id/texture"
-        android:layout_alignEnd="@+id/texture"
+        android:layout_alignStart="@+id/custom_camera"
+        android:layout_alignTop="@+id/custom_camera"
+        android:layout_alignEnd="@+id/custom_camera"
         android:layout_marginStart="100dp"
         android:layout_marginTop="200dp"
         android:layout_marginEnd="100dp"
         android:layout_marginBottom="200dp" />
+
 
     <FrameLayout
         android:id="@+id/control"
@@ -45,11 +53,11 @@
     </FrameLayout>
 
     <Button
-        android:id="@+id/picture"
+        android:id="@+id/simple_camera_take_picture"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_alignStart="@+id/texture"
-        android:layout_alignEnd="@+id/texture"
+        android:layout_alignStart="@+id/custom_camera"
+        android:layout_alignEnd="@+id/custom_camera"
         android:layout_alignBottom="@+id/control"
         android:layout_gravity="center"
         android:layout_marginStart="155dp"
