@@ -70,6 +70,7 @@ public class CustomCameraActivity extends AppCompatActivity {
         public void onPictureTaken(byte[] data, Camera camera) {
             Intent i = new Intent(getApplicationContext(), PhotoActivity.class);
             i.putExtra("image", data);
+            i.putExtra("animal", "paloma");
             startActivity(i);
             finish();
         }

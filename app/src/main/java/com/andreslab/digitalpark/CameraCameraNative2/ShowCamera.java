@@ -42,6 +42,7 @@ public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
             params.set("orientation","landscape");
             camera.setDisplayOrientation(0);
             params.setRotation(0);
+
         }
 
         params.setPictureSize(msize.width, msize.height);

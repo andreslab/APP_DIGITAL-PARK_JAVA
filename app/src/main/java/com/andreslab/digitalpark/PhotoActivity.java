@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.media.Image;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
@@ -54,7 +55,24 @@ public class PhotoActivity extends AppCompatActivity {
             Bitmap bmp = BitmapFactory.decodeByteArray(photo, 0, photo.length);
             // Set the Bitmap data to the ImageView
 
-            Bitmap new_bmp = combineImages(bmp,bmp);
+
+            //rotate
+            Matrix matrix = new Matrix();
+
+            matrix.postRotate(90);
+
+            Bitmap scaledBitmap = Bitmap.createScaledBitmap(bmp, bmp.getWidth(), bmp.getHeight(), true);
+
+            Bitmap rotatedBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
+
+
+
+            String animalName = extras.getString("animal");
+
+            int idAnimal = this.getResources().getIdentifier("img_"+animalName+"_min", "drawable", this.getPackageName());
+            Bitmap animal = BitmapFactory.decodeResource(this.getResources(), idAnimal);
+
+            Bitmap new_bmp = combineImages(rotatedBitmap,animal);
             imageView.setImageBitmap(new_bmp);
         }else{
             Toast.makeText(getApplicationContext(), "A ocurrido un problema con la imagen", Toast.LENGTH_SHORT).show();
@@ -192,26 +210,28 @@ public class PhotoActivity extends AppCompatActivity {
     }
 
 
-    public Bitmap combineImages(Bitmap c, Bitmap s)
+    public Bitmap combineImages(Bitmap photo, Bitmap animal)
     {
         Bitmap cs = null;
 
         int width, height = 0;
 
-        if(c.getWidth() > s.getWidth()) {
-            width = c.getWidth() + s.getWidth();
-            height = c.getHeight();
+        /*if(photo.getWidth() > animal.getWidth()) {
+            width = photo.getWidth() + animal.getWidth();
+            height = photo.getHeight();
         } else {
-            width = s.getWidth() + s.getWidth();
-            height = c.getHeight();
-        }
+            width = animal.getWidth() + animal.getWidth();
+            height = photo.getHeight();
+        }*/
+        width = photo.getWidth();
+        height = photo.getHeight();
 
         cs = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 
         Canvas comboImage = new Canvas(cs);
 
-        comboImage.drawBitmap(c, 0f, 0f, null);
-        comboImage.drawBitmap(s, c.getWidth(), 0f, null);
+        comboImage.drawBitmap(photo, 0f, 0f, null);
+        comboImage.drawBitmap(animal, width / 2, height / 2, null);
 
         return cs;
     }
