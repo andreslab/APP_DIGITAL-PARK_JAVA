@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -29,11 +30,15 @@ public class CustomCameraActivity extends AppCompatActivity {
 
     String animalName = "";
 
+    ImageView imageViewAnimal;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_camera);
         frameLayout = (FrameLayout)findViewById(R.id.custom_camera);
+
+        imageViewAnimal = (ImageView) findViewById(R.id.imageViewAnimal);
 
 
         Bundle extras = getIntent().getExtras();
@@ -73,8 +78,11 @@ public class CustomCameraActivity extends AppCompatActivity {
 
         showGifView.setLayoutParams(layoutParams);
 
-        showGifView.setGifImageDrawableId(R.drawable.bird_2);
-        showGifView.drawGif();
+        /*showGifView.setGifImageDrawableId(R.drawable.bird_2);
+        showGifView.drawGif();*/
+
+        int idAnimal = this.getResources().getIdentifier(animalName+"_gift", "drawable", this.getPackageName());
+        imageViewAnimal.setImageResource(idAnimal);
 
     }
 

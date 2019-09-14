@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -26,10 +27,17 @@
         android:layout_alignStart="@+id/custom_camera"
         android:layout_alignTop="@+id/custom_camera"
         android:layout_alignEnd="@+id/custom_camera"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="200dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginBottom="200dp" />
+        android:layout_marginEnd="150dp"
+        android:layout_marginBottom="200dp" >
+
+        <ImageView
+            android:id="@+id/imageViewAnimal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/not" />
+    </LinearLayout>
 
 
     <FrameLayout
