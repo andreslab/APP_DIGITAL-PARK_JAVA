@@ -69,7 +69,7 @@ public class PhotoActivity extends AppCompatActivity {
 
             String animalName = extras.getString("animal");
 
-            int idAnimal = this.getResources().getIdentifier("img_"+animalName+"_min", "drawable", this.getPackageName());
+            int idAnimal = this.getResources().getIdentifier(animalName+"_gift", "drawable", this.getPackageName());
             Bitmap animal = BitmapFactory.decodeResource(this.getResources(), idAnimal);
 
             Bitmap new_bmp = combineImages(rotatedBitmap,animal);
@@ -231,7 +231,8 @@ public class PhotoActivity extends AppCompatActivity {
         Canvas comboImage = new Canvas(cs);
 
         comboImage.drawBitmap(photo, 0f, 0f, null);
-        comboImage.drawBitmap(animal, width / 2, height / 2, null);
+        Bitmap resizeAnimal = Bitmap.createScaledBitmap(animal, animal.getWidth() / 3, animal.getHeight() / 3, false);
+        comboImage.drawBitmap(resizeAnimal, (width / 2 ) - (resizeAnimal.getWidth() / 2) , height / 2 - (resizeAnimal.getHeight() / 2), null);
 
         return cs;
     }

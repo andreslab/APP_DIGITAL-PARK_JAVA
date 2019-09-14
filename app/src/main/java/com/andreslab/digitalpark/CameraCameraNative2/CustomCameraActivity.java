@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.andreslab.digitalpark.PhotoActivity;
 import com.andreslab.digitalpark.R;
@@ -26,11 +27,23 @@ public class CustomCameraActivity extends AppCompatActivity {
 
     Button btnTakePicure;
 
+    String animalName = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_camera);
         frameLayout = (FrameLayout)findViewById(R.id.custom_camera);
+
+
+        Bundle extras = getIntent().getExtras();
+
+        if(extras != null) {
+            animalName = extras.getString("animal_name");
+        }else{
+            Toast.makeText(getApplicationContext(), "A ocurrido un problema", Toast.LENGTH_SHORT).show();
+        }
+
 
         //open Camera
         camera = Camera.open();
@@ -70,7 +83,7 @@ public class CustomCameraActivity extends AppCompatActivity {
         public void onPictureTaken(byte[] data, Camera camera) {
             Intent i = new Intent(getApplicationContext(), PhotoActivity.class);
             i.putExtra("image", data);
-            i.putExtra("animal", "paloma");
+            i.putExtra("animal", animalName);
             startActivity(i);
             finish();
         }
