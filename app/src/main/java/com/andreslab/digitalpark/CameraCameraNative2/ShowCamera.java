@@ -26,6 +26,7 @@ public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
     public void surfaceCreated(SurfaceHolder holder) {
 
         Camera.Parameters params = camera.getParameters();
+        params.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
 
         List<Camera.Size> sizes = params.getSupportedPictureSizes();
         Camera.Size msize = null;
@@ -34,8 +35,9 @@ public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
             msize = size;
         }
 
+
         if(this.getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE){
-            params.set("orientation","portrait");
+            params.set("orientation","landscape");
             camera.setDisplayOrientation(90);
             params.setRotation(90);
         }else{

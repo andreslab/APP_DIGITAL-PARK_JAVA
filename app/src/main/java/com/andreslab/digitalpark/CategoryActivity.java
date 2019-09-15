@@ -51,6 +51,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.andreslab.digitalpark.CategoryAdapter.eliminarAcentos;
+
 public class CategoryActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
@@ -100,7 +102,7 @@ public class CategoryActivity extends AppCompatActivity implements GoogleApiClie
     ArrayList<String> arrayLatitude = new ArrayList<String>();
     ArrayList<String> arrayLongitude = new ArrayList<String>();
 
-    double minDistanceMeters = 10.0; //rango de distance en metros
+    double minDistanceMeters = 12.0; //rango de distance en metros
     ArrayList<String> animalNameNearst = new ArrayList<String>();
 
     void resetArrays(){
@@ -143,6 +145,8 @@ public class CategoryActivity extends AppCompatActivity implements GoogleApiClie
 
                 GroupAnimals animal = grupoAnimales.get(position);
 
+
+
                 if (animalNameNearst.contains(animal.getName())) {
 
                     if (ARCoreIsSupport) {
@@ -157,6 +161,11 @@ public class CategoryActivity extends AppCompatActivity implements GoogleApiClie
                         i.putExtra("longitudes", animal.getLongitude());
                         i.putExtra("name", animal.getName());
                         startActivity(i);*/
+
+                        if (animal.getName().contains(" ")){
+                            animal.setName(animal.getName().replace(" ", "_"));
+                        }
+                        animal.setName(eliminarAcentos(animal.getName()));
 
                         Intent i = new Intent(getApplicationContext(), PopUpActivity.class);
                         i.putExtra("name", animal.getName());

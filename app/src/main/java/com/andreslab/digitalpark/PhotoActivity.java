@@ -360,8 +360,19 @@ public class PhotoActivity extends AppCompatActivity {
 
         Canvas comboImage = new Canvas(cs);
 
+
+
         comboImage.drawBitmap(photo, 0f, 0f, null);
-        Bitmap resizeAnimal = Bitmap.createScaledBitmap(animal, animal.getWidth() / 4, animal.getHeight() / 4, false);
+        int widthNewPhotoAnimal;
+        int heightNewPhotoAnimal;
+        if (animal.getWidth() < photo.getWidth() / 3){
+            widthNewPhotoAnimal = animal.getWidth();
+            heightNewPhotoAnimal = animal.getHeight();
+        }else{
+            widthNewPhotoAnimal = animal.getWidth() /4;
+            heightNewPhotoAnimal = (widthNewPhotoAnimal * animal.getHeight()) / animal.getWidth();
+        }
+        Bitmap resizeAnimal = Bitmap.createScaledBitmap(animal, widthNewPhotoAnimal, heightNewPhotoAnimal, false);
         comboImage.drawBitmap(resizeAnimal, (width / 2 ) - (resizeAnimal.getWidth() / 2) - 20 , height / 2 - (resizeAnimal.getHeight() / 2), null);
 
         return cs;
