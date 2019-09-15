@@ -248,7 +248,12 @@ public class CategoryActivity extends AppCompatActivity implements GoogleApiClie
         }
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(cat);
+        if (cat == "Mamifero"){
+            actionBar.setTitle("Mamífero");
+        }else{
+            actionBar.setTitle(cat);
+        }
+
 
 
     }

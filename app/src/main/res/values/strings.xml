@@ -22,6 +22,9 @@
         ]]>
     </string>
 
+    <string name="description_cocodrilo">
+        De hocico alargado, muestra el cuarto colmillo de su mandÌbula inferior al cerrarlo, asÌ se lo diferencia de caimanes y alig·tores. Habita en pantanos, rÌos y manglares; puede medir m·s de 4,5 metros y los machos son m·s grandes que las hembras. El color dorsal de los cocodrilos adultos varÌa entre verde oliva, gris y marrÛn y su vientre es blanco.
+    </string>
     <string name="description_perezoso">
         Su piel peluda y de color café, le sirve para camuflarse en el bosque. Tiene ojos muy redondos y pequeños. Sus uñas son fuertes, largas y en forma de garras. Sus largos brazos le permiten pasarse abrazado a los árboles. Anda tan despacio que parece estar quieto todo el tiempo; es de esta forma que evita ser visto por sus depredadores.
     </string>
@@ -38,7 +41,21 @@
         La tortuga mordedora es una especie que habitan comúnmente en los bosques de la provincia del Guayas. Las especies de tortugas en el Parque Histórico Guayaquil son principalmente carnívoras, aunque también se alimentan de algunos vegetales. Pueden vivir en hábitats acuáticos y terrestres, es por eso que siempre se las encuentra cerca de ríos o esteros.</string>
     <string name="description_caiman_anteojos">
         Tiene alrededor de sus ojos un arco de hueso que se parece al marco de unos anteojos, de ahí su nombre. Usualmente habita en lagos, estanques, humedades y afluentes de ríos donde la corriente no es rápida. Su piel está cubierta de escamas duras, color café/verduzco oscuro; tiene una cola larga y fuerte, con la que se impulsa para nadar. Se alimenta de peces, anfibios, reptiles, aves y pequeños mamíferos.</string>
-    <string name="description_cocodrilo">
-        De hocico alargado, muestra el cuarto colmillo de su mandíbula inferior al cerrarlo, así se lo diferencia de caimanes y aligátores. Habita en pantanos, ríos y manglares; puede medir más de 4,5 metros y los machos son más grandes que las hembras. El color dorsal de los cocodrilos adultos varía entre verde oliva, gris y marrón y su vientre es blanco.
+    <string name="description_loro">
+    Tienen un pico con una forma curvada caracterÌstica, la mandÌbula superior con una movilidad leve que se empalma con el cr·neo, y una postura generalmente erguida. Viven por regla general en zonas c·lidas y arboladas, son buenas voladoras y diestras escaladoras de ramas y ·rboles gracias a sus garras prensiles zigod·ctilas. Adem·s poseen una gran capacidad craneal, siendo uno de los grupos de aves m·s inteligentes.
+    </string>
+    <string name="description_papagayo">
+        ìEs un ave de la familia de los psit·cidos y una de las dos subespecies de la especie Ara ambiguus. Los Papagayos de Guayaquil en estado salvaje viven en sectores de la parte occidental del Ecuador y habita en bosques h˙medos tropicales y secos del litoral ecuatoriano.Cunsi Pindoî la seÒora de los monos, es el nombre con el que la comunidad Cof·n denomina al ·guila harpÌa, que vive en los bosques h˙medos tropicales del Este de nuestro paÌs. Son aves depredadoras y sus presas favoritas son mamÌferos como monos y perezosos. Pueden llegar a medir un metro y la envergadura de sus alas sobrepasa los dos metros. La hembra es de mayor tamaÒo que el macho. Es una de las ·guilas m·s grandes y poderosas en el mundo. Es una especie que se encuentra en peligro de extinciÛn.</string>
+    <string name="description_guacamayo">
+        El guacamayo (Ara) es un ave muy llamativa por el colorido de su plumaje. De acuerdo al paÌs o regiÛn tambiÈn se le llama guacamaya roja, guaca, papagayo y lapa roja; en inglÈs se llama scarlet macaw que significa literalmente ìguacamaya escarlataî. Es una de las especies de loro neotropical m·s grandes del continente americano y del planeta.
+    </string>
+    <string name="description_chancho">
+        El cerdo domÈstico adulto tiene un cuerpo pesado y redondeado, hocico comparativamente largo y flexible, patas cortas con pezuÒas (cuatro dedos) y una cola corta. La piel, gruesa pero sensible, est· cubierta en parte de ·speras cerdas y exhibe una amplia variedad de colores y dibujos. A pesar de su apariencia son animales ·giles, r·pidos e inteligentes.
+    </string>
+    <string name="description_venado">
+        Tienen patas delgadas, pezuÒas hendidas y largos cuellos con cabezas largas y finas, aptas para el ramoneo o el pastoreo, salvo algunas adaptaciones concretas en algunas especies como es el caso de los alces, que pastan vegetales acu·ticos, o los renos, de hocicos peludos y anchos aptos para ramonear liquen en las zonas ·rticas. Son esbeltos herbÌvoros.
+    </string>
+    <string name="description_caiman">
+        Tiene alrededor de sus ojos un arco de hueso que se parece al marco de unos anteojos, de ahÌ su nombre. Usualmente habita en lagos, estanques, humedades y afluentes de rÌos donde la corriente no es r·pida. Su piel est· cubierta de escamas duras, color cafÈ/verduzco oscuro; tiene una cola larga y fuerte, con la que se impulsa para nadar. Se alimenta de peces, anfibios, reptiles, aves y pequeÒos mamÌferos.
     </string>
 </resources>
