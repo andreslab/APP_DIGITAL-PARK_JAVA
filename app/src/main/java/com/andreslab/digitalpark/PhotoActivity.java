@@ -73,7 +73,7 @@ public class PhotoActivity extends AppCompatActivity {
 
             matrix.postRotate(90);
 
-            Bitmap scaledBitmap = Bitmap.createScaledBitmap(bmp, bmp.getWidth() * 10, bmp.getHeight() * 10, true);
+            Bitmap scaledBitmap = Bitmap.createScaledBitmap(bmp, bmp.getWidth(), bmp.getHeight(), true);
 
             Bitmap rotatedBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
 
@@ -359,7 +359,7 @@ public class PhotoActivity extends AppCompatActivity {
         width = photo.getWidth();
         height = photo.getHeight();
 
-        cs = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        cs = Bitmap.createBitmap(width, height, Bitmap.Config.RGBA_F16);
 
         Canvas comboImage = new Canvas(cs);
 
