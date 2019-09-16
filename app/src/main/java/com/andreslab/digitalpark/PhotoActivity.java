@@ -73,9 +73,12 @@ public class PhotoActivity extends AppCompatActivity {
 
             matrix.postRotate(90);
 
-            Bitmap scaledBitmap = Bitmap.createScaledBitmap(bmp, bmp.getWidth(), bmp.getHeight(), true);
+            Bitmap scaledBitmap = Bitmap.createScaledBitmap(bmp, bmp.getWidth() * 10, bmp.getHeight() * 10, true);
 
             Bitmap rotatedBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
+
+
+            Log.i("PHOTO","width: " + bmp.getWidth() + " height: " + bmp.getHeight());
 
 
 
